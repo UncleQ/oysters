@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 import pandas as pd
 import numpy as np
 import logging
@@ -13,10 +13,9 @@ logging.basicConfig(level=logging.INFO,
                     # filemode='w')
 
 
-
 def trans_df(file_name):
-    old_path = 'data/one'
-    new_path = 'data/new'
+    old_path = '~/data/one'
+    new_path = '~/data/new'
     stock_df = pd.read_csv(os.path.join(old_path, file_name), low_memory=False)
     series_open = stock_df['open']
     nan_pos = -1 
@@ -35,8 +34,9 @@ def trans_df(file_name):
 
 def main():
     print('hello')
-    for root, dirs, files in os.walk('data/one'):
+    for root, dirs, files in os.walk('/home/tars/data/one'):
         for name in files:
+            # print(name)
             trans_df(name)
             
 
