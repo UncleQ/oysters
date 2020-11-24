@@ -38,8 +38,8 @@ def linear_regression(x, y):
 
 def find(path, name, total_len, cur_index):
     file_full_path = os.path.join(path, name)
-    train_days = 40
-    pre_days = 40
+    train_days = 60
+    pre_days = 20
     pic_index = 0
     stock_df = pd.read_csv(file_full_path, low_memory=False)
     close_series = stock_df['close']
@@ -65,7 +65,7 @@ def find(path, name, total_len, cur_index):
         pre_min_value = close_series[pos1:pos2].min()
         mid_value = (max_value + min_value) / 2
         half_value = max_value - mid_value
-        diff_value = mid_value * 0.2
+        diff_value = mid_value * 0.1
         nx = np.array(index_test_list)
         ny = np.array(close_list[pos1:pos2])
         a0, a1 = linear_regression(nx, ny)
@@ -89,7 +89,7 @@ def find(path, name, total_len, cur_index):
             plt.axhline(y=mid_value, ls=":", c="red")
             plt.axhline(y=mid_value * 1.4, ls=":", c="blue")
             # plt.show()
-            pic_path = '/home/tars/data/pic3/%s_%d.png' % (name, pic_index)
+            pic_path = '/home/tars/data/pic4/%s_%d.png' % (name, pic_index)
             pic_index += 1
             plt.savefig(pic_path)
             plt.cla()
