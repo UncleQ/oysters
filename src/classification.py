@@ -14,9 +14,10 @@ logging.basicConfig(level=logging.INFO,
 
 
 def trans_df(file_name):
-    old_path = '~/data/one'
-    new_path = '~/data/new'
+    old_path = '~/data/daily_basic'
+    new_path = '~/data/daily_basic_new'
     stock_df = pd.read_csv(os.path.join(old_path, file_name), low_memory=False)
+    '''
     series_open = stock_df['open']
     nan_pos = -1 
     for i,v in series_open.items():
@@ -28,15 +29,20 @@ def trans_df(file_name):
         logging.info('%s NaN pos is %d' % (file_name, nan_pos))
     else:
         logging.info('%s has no NaN', file_name)
+    '''
     stock_df = stock_df.iloc[::-1]
     stock_df.to_csv(os.path.join(new_path, file_name), encoding="utf-8", mode="w", header=True, index=False)
 
 
 def main():
     print('hello')
-    for root, dirs, files in os.walk('/home/tars/data/one'):
+    for root, dirs, files in os.walk('/home/tars/data/daily_basic'):
+        l = len(files)
+        i = 0
         for name in files:
             # print(name)
+            i += 1
+            logging.info('%d/%d-%s' % (i, l, name))
             trans_df(name)
             
 
